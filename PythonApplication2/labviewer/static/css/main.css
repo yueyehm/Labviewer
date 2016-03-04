@@ -1,0 +1,842 @@
+/* layout style */
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    overflow-y: scroll;
+}
+
+body
+{
+    background-color: #efeeef;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size: 14px;
+}
+
+a
+{
+    color: black;
+    outline: none;
+}
+
+    a:hover
+    {
+        color: black;
+    }
+
+p
+{
+    padding: 10px 0px 10px 0px;
+}
+
+h1, h2
+{
+    padding-bottom: 15px;
+}
+
+#content_space
+{
+    background-color: white;
+}
+
+#header, #content, #footer
+{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#content
+{
+    background-color: white;
+}
+
+.clear
+{
+    clear: both;
+}
+
+#header_right
+{
+    float: right;
+}
+
+#title
+{
+    float: left;
+    color: #a8a8a8;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    font-weight: lighter;
+    font-size: 1.31em;
+    padding: 22px 0;
+}
+
+#hello
+{
+    float: right;
+    width: 100%;
+    text-align: right;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+#navigation
+{
+    float: right;
+    margin: 35px 0 3px 0;
+}
+
+    #navigation li
+    {
+        list-style-type: none;
+        display: inline;
+    }
+
+        #navigation li a
+        {
+            float: left;
+            display: block;
+            color: #a8a8a8;
+            text-decoration: none;
+            padding-left: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+            #navigation li a:hover
+            {
+                color: #333;
+            }
+
+#footer
+{
+    height: 100px;
+    font-size: 0.8em;
+    padding-top: 10px;
+}
+
+/* page style */
+
+#page_header
+{
+    padding-bottom: 5px;
+}
+
+    #page_header h2
+    {
+        padding-top: 20px;
+        font-size: 1.7em;
+    }
+
+    #page_header hr
+    {
+        margin-top: 15px;
+        border: 1px solid black;
+    }
+
+    #page_header a
+    {
+        float: right;
+        margin-top: 26px;
+        font-size: 1.1em;
+        text-decoration: none;
+    }
+/* submit stype*/
+#submit
+{
+}
+
+    #submit .log
+    {
+        color: gray;
+    }
+
+        #submit .log li
+        {
+            position: relative;
+            left: 20px;
+        }
+
+    #submit #submit_header
+    {
+    }
+
+        #submit #submit_header hr
+        {
+            margin-bottom: 10px;
+        }
+
+    #submit #submitForm
+    {
+    }
+
+        #submit #submitForm h3
+        {
+            margin: 20px 0 5px 0;
+        }
+
+        #submit #submitForm label
+        {
+            text-align: right;
+            display: block;
+            width: 70px;
+            margin-right: 5px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        #submit #submitForm input
+        {
+            font-size: 1em;
+            height: 23px;
+            margin: 0;
+            padding: 0;
+            /*margin: 3px 0;*/
+        }
+
+            #submit #submitForm input[type="text"]
+            {
+                width: 495px;
+                height: 21px;
+            }
+
+            #submit #submitForm input[type="file"]
+            {
+                width: 500px;
+            }
+
+            #submit #submitForm input[type="submit"]
+            {
+                width: 65px;
+                margin-top: 10px;
+            }
+
+/* bottom element */
+.bottom
+{
+    padding-bottom: 20px;
+}
+
+/* data table */
+
+#data
+{
+    padding: 0px 0 20px 0;
+    /*background-color: lightgreen;*/
+}
+
+.t1
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0 none;
+    width: 100%;
+    background-color: white;
+}
+
+    .t1 th
+    {
+        font-size: 1.15em;
+        text-align: left;
+        border: none 0px;
+        border-bottom: 2px solid black;
+        padding: 0.5em 0em;
+    }
+
+    .t1 tr.detail, .tree_suite_detail .case_detail
+    {
+        display: none;
+    }
+
+tr.detail > td
+{
+    padding: 5px 25px 10px 25px;
+    background-color: #f1f1f1;
+}
+.tree_suite_detail .case_detail > td
+{
+    /*background-color: lightgreen;*/
+    padding: 5px 25px 10px 25px;
+}
+
+    tr.detail > td.comment
+    {
+        /*background-color: white;*/
+    }
+
+tr.detail p
+{
+    font-size: 0.945em;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+    /*border-bottom: 1px solid black;*/
+}
+
+    tr.detail p strong
+    {
+        font-weight: 600;
+        margin-right: 6px;
+    }
+
+.t1 td
+{
+    padding: 0.5em 0em;
+    border: 0 none;
+    word-break: break-all;
+}
+
+    .t1 td.td_suite
+    {
+        padding: 0px;
+    }
+
+    .t1 td.test_name
+    {
+        word-break: break-all;
+    }
+
+    .t1 td.comment_count
+    {
+        /*text-align: right;
+        padding-right: 12px;*/
+    }
+
+.t1 .t_suite tr.data > td
+{
+    border-bottom: 1px solid lightgray;
+}
+
+/* t1 column width */
+
+.t1 th#p_detail
+{
+    width: 2%;
+}
+
+.t1 th#p_name
+{
+    /*width: 36%;*/
+}
+
+.t1 th#p_owner
+{
+    width: 10%;
+}
+
+.t1 th#p_submitTime
+{
+    width: 18%;
+}
+
+.t1 th#p_state
+{
+    width: 18%;
+}
+
+.t1 th#p_action
+{
+    width: 18%;
+}
+
+.t1 .tc_detail
+{
+    width: 2%;
+}
+
+.t1 .tc_name
+{
+    width: 18%;
+}
+
+.t1 .tc_env
+{
+    width: 24.5%;
+}
+
+.t1 .tc_priority
+{
+    width: 9%;
+}
+
+.t1 .tc_runtime
+{
+    width: 8%;
+}
+
+.t1 .tc_state
+{
+    width: 12%;
+}
+
+.t1 .tc_result
+{
+    width: 11%;
+}
+
+.t1 .tc_comment
+{
+    width: 10%;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.t1 .tc_action
+{
+    width: 5.5%;
+}
+
+.t1 th#j_id
+{
+    width: 5%;
+}
+
+.t1 th#j_machine
+{
+    width: 15%;
+}
+
+.t1 th#j_ip
+{
+    width: 12%;
+}
+
+.t1 th#j_start
+{
+    width: 15%;
+}
+
+.t1 th#j_end
+{
+    width: 16%;
+}
+
+.t1 th#j_running
+{
+    width: 8%;
+}
+
+.t1 th#j_state
+{
+    width: 15%;
+}
+
+.t1 th#jp_running
+{
+    width: 8%;
+}
+
+.t1 .jp_td
+{
+    vertical-align: top;
+}
+
+.t1 a#toggleDetail, .t1 a#toggleDetail_suite, .t1 a#toggleDetail_case
+{
+    font-size: 0.8em;
+    text-decoration: none;
+    padding-left: 10%;
+}
+
+.t1 td a
+{
+    padding-left: 0;
+    text-decoration: none;
+}
+
+    .t1 td a:hover
+    {
+        text-decoration: underline;
+    }
+
+.t_suite
+{
+    width: 100%;
+}
+
+.breakdown
+{
+    color: red;
+}
+
+.t3
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0 none;
+    font-size: 0.9em;
+    margin: 10px 0px;
+}
+
+    .t3 th
+    {
+        border-bottom: 2px solid black;
+        padding: 0.5em 0em;
+    }
+
+    .t3 td
+    {
+        padding: 0.5em 0em;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .t3 th#stat_priority
+    {
+        width: 90px;
+    }
+
+    .t3 th#stat_amount
+    {
+        width: 90px;
+    }
+
+    .t3 th#stat_exec
+    {
+        width: 90px;
+    }
+
+    .t3 th#stat_execRate
+    {
+        width: 90px;
+    }
+
+    .t3 th#stat_pass
+    {
+        width: 90px;
+    }
+
+    .t3 th#stat_passRate
+    {
+        width: 90px;
+    }
+
+.actionButton
+{
+    color: white;
+    background-color: #4f4f4f;
+    cursor: pointer;
+}
+
+    .actionButton:disabled
+    {
+        background-color: #cccccc;
+    }
+
+.level1_button_size
+{
+    width: 60px;
+    height: 20px;
+    border: 0px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.level2_button_size
+{
+    font-size: 0.92em;
+    width: 50px;
+    height: 16px;
+    border: 0px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+.digitCell
+{
+    text-align: right;
+}
+
+.textCell
+{
+    text-align: left;
+}
+
+#dialog-form fieldset
+{
+    padding: 0;
+    border: 0;
+    margin-top: 25px;
+}
+
+#dialog-form label, input
+{
+    display: block;
+}
+
+#dialog-form input.text
+{
+    margin-bottom: 12px;
+    width: 95%;
+    padding: .4em;
+}
+
+.ui-dialog .ui-state-error
+{
+    padding: .3em;
+}
+
+.validateTips
+{
+    border: 1px solid transparent;
+    padding: 0.3em;
+}
+
+.t2
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    border: 0 none;
+    font-size: 0.8em;
+}
+/* case detail style in the tree view, overwrite the font-zie in .t2 */
+.case_detail_table
+{
+    font-size: 0.93em;
+}
+
+    .case_detail_table th
+    {
+        /*vertical-align: top;*/
+    }
+
+    .t2 th
+    {
+        width: 110px;
+        text-align: left;
+        border: none 0px;
+        padding: 0;
+        /*border-bottom: 1px solid black;*/
+        font-weight: 600;
+    }
+
+    .t2 td
+    {
+        padding: 0.1em 0em 0.1em 0em;
+        border: none 0px;
+        /*border-bottom: 1px solid lightgray;*/
+    }
+
+.tree_suites > tbody > tr > td
+{
+    border-bottom: 1px solid lightgray;
+}
+.tree_suites .ts_stat
+{
+    text-align: right;
+    width:4%;
+}
+.tree_suites .ts_action
+{
+    width: 7%;
+    padding-left: 15px;
+}
+
+
+.tree_suite_detail
+{
+    /*background-color: lightgreen;*/
+    width: 900px;
+    margin-top: 8px;
+}
+.tree_suite_detail > thead > tr > th
+{
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+.tree_suite_detail > tbody > tr.data2 > td
+{
+    padding: 3px 0px;
+    border-bottom: 1px solid lightgray;
+}
+.tree_suite_detail > tbody > tr.case_detail > td
+{
+    padding: 3px 25px;
+}
+    .tree_suite_detail .tsd_name
+    {
+        /*width: 150px;*/
+    }
+    .tree_suite_detail .tsd_state
+    {
+        width: 80px;
+    }
+    .tree_suite_detail .tsd_result
+    {
+        width: 80px;
+    }
+    .tree_suite_detail .tsd_time
+    {
+        width: 80px;
+    }
+    .tree_suite_detail .tsd_duration, .tree_suite_detail .tsd_action, .tree_suite_detail .tsd_critical
+    {
+        width: 50px;
+    }
+    .tree_suite_detail > thead > tr > th.tsd_comment, .tree_suite_detail > tbody > tr.data2 > td.tsd_comment
+    {
+        width: 60px;
+        /*padding-right: 15px;*/
+        /*text-align: right;*/
+    }
+
+
+.tree_suites .ts_priority
+{
+    width: 10%;
+}
+.tree_suites .ts_caseExec
+{
+    width: 10%;
+}
+.tree_suites .ts_env
+{
+    width: 33%;
+}
+.tree_suites .ts_stat
+{
+    text-align: right;
+    width:4%;
+}
+.tree_suites .ts_action
+{
+    width: 7%;
+    padding-left: 15px;
+}
+
+.tree_suites p.suite_detail
+{
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.tree_suites p.suite_detail + p
+{
+    margin-top: 0px;
+}
+    .tree_suites p.suite_detail span.label
+    {
+        display: block;
+        float: left;
+        width: 170px;
+        font-weight: 600;
+    }
+
+h3
+{
+    margin: 25px 0 10px 0;
+    font-size: 1.3em;
+}
+
+    /* test job comments */
+
+    h3#add_cmt
+    {
+        margin-top: 10px;
+    }
+
+a#toggle_job_comments
+{
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+#job_comments
+{
+    display: none;
+}
+
+#t_comment
+{
+    margin: 5px 0 0 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0 none;
+}
+
+    #t_comment td
+    {
+        border-top: 1px solid #888888;
+        border-bottom: 0px;
+        padding: 5px 10px 15px 10px;
+        vertical-align: top;
+        font-size: 11px;
+        background-color: white;
+    }
+
+        #t_comment td.content
+        {
+            width: 600px;
+            /*background-color: #efeeef;*/
+            /*background-color: #f1f1f1;*/
+        }
+
+        #t_comment td.info
+        {
+            width: 160px;
+            word-break: break-all;
+        }
+
+            #t_comment td.info div
+            {
+                float: left;
+            }
+
+                #t_comment td.info div.name
+                {
+                    width: 50px;
+                    font-weight: bold;
+                    /*background-color: lightblue;*/
+                }
+
+                #t_comment td.info div.value
+                {
+                    width: 110px;
+                    /*background-color: lightcoral;*/
+                }
+
+
+/* new comment text area */
+
+textarea#newComment
+{
+    border: 0;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size: 14px;
+    width: 600px;
+    height: 200px;
+    scrollbar-face-color: #dddddd;
+    scrollbar-track-color: #f1f1f1;
+    scrollbar-arrow-color: #333333;
+    scrollbar-highlight-color: #f1f1f1;
+    scrollbar-shadow-color: #f1f1f1;
+    scrollbar-3dlight-color: #f1f1f1;
+    scrollbar-darkshadow-color: #f1f1f1;
+}
+
+button#addComment
+{
+    color: white;
+    width: 70px;
+    margin-left: 7px;
+    /*vertical-align: top;*/
+}
+
+#view_switch
+{
+    color: #a8a8a8;
+    font-weight: bold;
+}
+
+    #view_switch:hover
+    {
+        color: #333;
+        cursor: pointer;
+    }

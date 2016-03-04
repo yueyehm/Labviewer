@@ -1,0 +1,54 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+{% block content %}
+<div id="data">
+    <script>
+
+        var projectstable = document.getElementById('data'),
+            buttons = projectstable.getElementsByTagName('button');
+
+        projectstable.onclick = function (ev) {
+            var ev = ev || window.event,
+                target = ev.target || ev.srcElement;
+            for (var i = 0, l = buttons.length; i < l; i++) {
+                if (buttons[i] === target) {
+                    alert(buttons[i].innerHTML);
+                }
+            }
+        }
+    </script>
+    <table class="t1">
+        <thead>
+            <tr>
+                <th id="p_detail"></th>
+                <th id="p_name">Name</th>
+                <th id="p_owner">Owner</th>
+                <th id="p_submitTime">Submit Time</th>
+                <th id="p_state">State</th>
+                <th id="p_action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+                {{ macros.render_projectrow(entry) }}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+<ul class="pager">
+    {% if has_next %}
+    <li class="previous" >
+    <a href="{{ url_for('entries', page=page + 1) }}">&larr; Older</a>
+    </li>
+    {% endif %}
+    {% if has_prev %}
+    <li class="next">
+    <a href="{{ url_for('entries', page=page - 1) }}">&rarr; Newer</a>
+    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}

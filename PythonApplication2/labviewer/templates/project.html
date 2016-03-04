@@ -1,0 +1,106 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+{% block content %}
+<div id="page_header">
+    <h2>Project - {{ entry.Name }}</h2>
+</div>
+
+<div id="data">
+    <h3>Overall Statistics</h3>
+    <div id="statistics" style="float: left">
+        <table class="t3">
+            <thead>
+                <tr>
+                    <th id="stat_priority" class="textCell">Case Priority</th>
+                    <th id="stat_amount" class="digitCell">Amount</th>
+                    <th id="stat_exec" class="digitCell">Executed</th>
+                    <th id="stat_execRate" class="digitCell">Exec Rate</th>
+                    <th id="stat_pass" class="digitCell">Passed</th>
+                    <th id="stat_passRate" class="digitCell">Pass Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="data">
+                    <td class="textCell">Must Do</td>
+                    <td class="digitCell">{{ entry.Statistics.MustDo }}</td>
+                    <td class="digitCell">{{ entry.Statistics.MustDoExecuted }}</td>
+                    <td class="digitCell">{{ entry.Statistics.MustDoExecuteRate }}</td>
+                    <td class="digitCell">{{ entry.Statistics.MustDoPassed }}</td>
+                    <td class="digitCell">{{ entry.Statistics.MustDoPassRate }}</td>
+                </tr>
+                <tr class="data">
+                    <td class="textCell">Important</td>
+                    <td class="digitCell">{{ entry.Statistics.Important }}</td>
+                    <td class="digitCell">{{ entry.Statistics.ImportantExecuted }}</td>
+                    <td class="digitCell">{{ entry.Statistics.ImportantExecuteRate }}</td>
+                    <td class="digitCell">{{ entry.Statistics.ImportantPassed }}</td>
+                    <td class="digitCell">{{ entry.Statistics.ImportantPassRate }}</td>
+                </tr>
+                <tr class="data">
+                    <td class="textCell">Nice To Have</td>
+                    <td class="digitCell">{{ entry.Statistics.NiceToHave }}</td>
+                    <td class="digitCell">{{ entry.Statistics.NiceToHaveExecuted }}</td>
+                    <td class="digitCell">{{ entry.Statistics.NiceToHaveExecuteRate }}</td>
+                    <td class="digitCell">{{ entry.Statistics.NiceToHavePassed }}</td>
+                    <td class="digitCell">{{ entry.Statistics.NiceToHavePassRate }}</td>
+                </tr>
+                <tr class="data">
+                    <td class="textCell">Total</td>
+                    <td class="digitCell">{{ entry.Statistics.Total }}</td>
+                    <td class="digitCell">{{ entry.Statistics.TotalExecuted }}</td>
+                    <td class="digitCell">{{ entry.Statistics.TotalExecuteRate }}</td>
+                    <td class="digitCell">{{ entry.Statistics.TotalPassed }}</td>
+                    <td class="digitCell">{{ entry.Statistics.TotalPassRate }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            * Pass Rate = Passed / Executed
+        </p>
+    </div>
+
+    <div>
+        <table class="t1">
+            <thead>
+                <tr>
+                    <th class="tc_detail"></th>
+                    <th class="tc_name">Case</th>
+                    <th class="tc_env">Environment</th>
+                    <th class="tc_priority">Priority</th>
+                    <th class="tc_runtime">Run Time</th>
+                    <th class="tc_state">State</th>
+                    <th class="tc_result">Result</th>
+                    <th class="tc_comment">Comment</th>
+                    <th class="tc_action">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for testsuite in entry.TestSuites %}
+                    <tr>
+                        <td colspan="9" class="td_suite">
+                            {% for testcase in testsuite.TestCases %}
+                            <table class="t_suite">
+                                <tr class="data">
+                                    <td></td>
+                                    <td class="tc_detail"><a id="toggleDetail" class="toggle" href="javascript:;">?</a></td>
+                                    <td class="tc_name">{{ testcase.Name }}</td>
+                                    <td class="tc_env">{{ testcase.Environment }}</td>
+                                    <td class="tc_priority">{{ testcase.Priority }}</td>
+                                    <td class="tc_runtime">{{ testcase.TestJob.FormattedRunningTime }}</td>
+                                    <td class="tc_state">{{ testcase.TestJob.Status }}</td>
+                                    <td class="tc_result">{{ testcase.TestJob.JobResult }}</td>
+                                    <td class="tc_comment">{{ testcase.TestJob.CommentsCount }}</td>
+                                    <td class="tc_action">Placeholder</td>
+                                </tr>
+                            </table>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

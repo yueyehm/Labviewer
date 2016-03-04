@@ -1,0 +1,14 @@
+{% macro render_projectrow(entry) %}
+    <tr class="data">
+        <td><a id="toggleDetail" class="toggle" href="javascript:;">?</a></td>
+        <td><span><a href={{ url_for('entry', projectid=entry.ID) }}>{{ entry.Name }}</a></span></td>
+        <td><span>{{ entry.UserName }}</span></td>
+        <td><span>{{ entry.CreateTime }}</span></td>
+        <td><span>{{ entry.State }}</span></td>
+        <td>
+            <button class="actionButton level1_button_size canDisable">Run</button>
+            <button class="actionButton level1_button_size canDisable">Stop</button>
+            <button class="actionButton level1_button_size canDisable">Delete</button>
+        </td>
+    </tr>
+{% endmacro %}
