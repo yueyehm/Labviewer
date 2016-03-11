@@ -1,6 +1,64 @@
-{% import "macros.html" as macros %}
+﻿{% import "macros.html" as macros %}
 {% extends "base.html" %}
 {% block content %}
+<script>
+    var vm = avalon.define({
+        $id: "project",
+        id: "{{entry.ID}}",
+        name: "",
+        description: "",
+        testsuites: [],
+        username: "",
+        createtime: "",
+        emails: "",
+        state: "",
+        statistics: {},
+        testjobs: []
+    });
+
+    function fillProject() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/project/" + vm.id,
+            datatype: "json",
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                vm.id = data.ID;
+                vm.name = data.Name;
+                vm.description = data.Description;
+                vm.testsuites = data.TestSuites;
+                vm.username = data.UserName;
+                vm.createtime = data.CreateTime;
+                vm.emails = data.Emails;
+                vm.state = data.State;
+                vm.statistics = data.Statistics;
+            }
+        })
+    }
+
+    function filljobs() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/jobs/projectid=" + vm.id,
+            datatype: "json",
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                vm.testjobs = data.sort(by("StartTime")).reverse();
+            }
+        })
+    }
+    fillProject();
+    filljobs();
+
+    $(document).ready(function () {
+        document_ready_event_handler();
+    });
+ 
+</script>
 <div id="page_header">
     <h2>Project - {{ entry.Name }}</h2>
 </div>
@@ -75,29 +133,59 @@
                     <th class="tc_action">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for testsuite in entry.TestSuites %}
-                    <tr>
+            <tbody ms-controller="project">
+                    <tr ms-repeat-testsuite="testsuites">
                         <td colspan="9" class="td_suite">
-                            {% for testcase in testsuite.TestCases %}
-                            <table class="t_suite">
+                            <table class="t_suite" ms-repeat-testcase="testsuite.TestCases">
                                 <tr class="data">
                                     <td></td>
-                                    <td class="tc_detail"><a id="toggleDetail" class="toggle" href="javascript:;">?</a></td>
-                                    <td class="tc_name">{{ testcase.Name }}</td>
-                                    <td class="tc_env">{{ testcase.Environment }}</td>
-                                    <td class="tc_priority">{{ testcase.Priority }}</td>
-                                    <td class="tc_runtime">{{ testcase.TestJob.FormattedRunningTime }}</td>
-                                    <td class="tc_state">{{ testcase.TestJob.Status }}</td>
-                                    <td class="tc_result">{{ testcase.TestJob.JobResult }}</td>
-                                    <td class="tc_comment">{{ testcase.TestJob.CommentsCount }}</td>
-                                    <td class="tc_action">Placeholder</td>
+                                    <td class="tc_detail"><a id="toggleDetail" class="toggle" href="javascript:;">▼</a></td>
+                                    <td class="tc_name">{{ testcase.Name|angular }}</td>
+                                    <td class="tc_env">{{ testcase.Environment|angular }}</td>
+                                    <td class="tc_priority">{{ testcase.Priority|angular }}</td>
+                                    <td class="tc_runtime">{{ testcase.TestJob.FormattedRunningTime|angular }}</td>
+                                    <td class="tc_state">{{ testcase.TestJob.Status|angular }}</td>
+                                    <td class="tc_result">{{ testcase.TestJob.JobResult|angular }}</td>
+                                    <td class="tc_comment">{{ testcase.TestJob.CommentsCount|angular }}</td>
+                                    <td class="tc_action">
+                                        <button class="actionButton level1_button_size canDisable" ms-visible="testcase.TestJob.Status != 'Running'">Run</button>
+                                        <button class="actionButton level1_button_size canDisable" ms-visible="testcase.TestJob.Status == 'Running'">Stop</button>
+                                    </td>
+                                </tr>
+                                <tr class="detail">
+                                    <td colspan="10">
+                                        <table class="t2">
+                                            <thead>
+                                                <tr>
+                                                    <th>Machine Name</th>
+                                                    <th>Machine IP</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th>Status</th>
+                                                    <th>Result</th>
+                                                    <th>Result File</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ms-repeat-testjob="testjobs" ms-if-loop="testjob.LinkID == testcase.LinkID">
+                                                    <td><span>{{testjob.TestMachineName|angular}}</span></td>
+                                                    <td>{{testjob.TestMachineIP|angular}}</td>
+                                                    <td class="time">{{testjob.StartTime|angular}}</td>
+                                                    <td class="time">{{testjob.EndTime|angular}}</td>
+                                                    <td>{{testjob.Status|angular}}</td>
+                                                    <td>{{testjob.JobResult|angular}}</td>
+                                                    <td>{{testjob.ResultPackagePath|angular}}</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </td>
                                 </tr>
                             </table>
-                            {% endfor %}
+
+
                         </td>
                     </tr>
-                {% endfor %}
             </tbody>
         </table>
     </div>
