@@ -1,0 +1,134 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    var vm = avalon.define({
+        $id: "job",
+        id: "{{entry.jobid}}",
+        linkid: "",
+        createtime: "",
+        status: "",
+        statushistory: [],
+        testmachineip: "",
+        testmachinename: "",
+        starttime: "",
+        endtime: "",
+        formattedrunningtime: "",
+        resultpackagepath: "",
+        jobresult: "",
+        commentcount: "",
+        isrunning: "",
+        jobaction: ""
+    })
+
+    function fillJob() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/job/" + vm.id,
+            datatype: "json",
+            xhrFields: { withCredentials: true },
+            success: function (data) {
+                vm.id = data.ID;
+                vm.linkid = data.LinkID;
+                vm.createtime = data.CreateTime;
+                vm.status = data.Status;
+                vm.statushistory = data.StatusHistory;
+                vm.testmachineip = data.TestMachineIP;
+                vm.testmachinename = data.TestMachineName;
+                vm.starttime = data.StartTime;
+                vm.endtime = data.EndTime;
+                vm.formattedrunningtime = data.FormattedRunningTime;
+                vm.resultpackagepath = data.ResultPackagePath;
+                vm.jobresult = data.JobResult;
+                vm.isrunning = data.IsRunning;
+            }
+        })
+    }
+
+    fillJob();
+
+</script>
+
+<div id="data" ms-controller="job">
+    <p style="text-align:right">
+        <a href="{{ url_for('entry', projectid=entry.projectid) }}">Back to project detail</a>
+    </p>
+
+    <table class="t1">
+        <thead>
+            <tr>
+                <th id="j_id">Id</th>
+                <th id="j_machine">Machine Name</th>
+                <th id="j_ip">Machine IP</th>
+                <th id="j_state">State</th>
+                <th id="j_result">Result</th>
+                <th id="j_start">Start</th>
+                <th id="j_end">End</th>
+                <th id="j_running">Run Time</th>
+            </tr>
+        </thead>
+        <tbody">
+            <tr class="data">
+                <td><span ms-text="id"></span></td>
+                <td><span ms-text="testmachinename""></span></td>
+                <td><span ms-text="testmachineip"></span></td>
+                <td><span ms-text="status"></span></td>
+                <td><span ms-text="jobresult"></span></td>
+                <td><span ms-text="starttime"></span></td>
+                <td><span ms-text="endtime"></span></td>
+                <td><span ms-text="formattedrunningtime"></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Job Progress</h3>
+    <table class="t1">
+        <thead>
+            <tr>
+                <th id="jp_progress">Progress</th>
+                <th id="jp_running">Run Time</th>
+            </tr>
+        </thead>
+        <tbody ms-repeat-entry="statushistory">
+            <tr class="data">
+                <td class="jp_td"><span ms-html="entry.Description"></span></td>
+                <td class="jp_td"><span ms-html="entry.FormattedRunningTime"></span></td>
+            </tr>
+        </tbody>
+    </table>
+        
+    <h3>
+        Job Comments: <span data-bind="text: comments().length"></span>
+        <a id="toggle_job_comments" href="javascript:;">?</a>
+    </h3>
+    <div id="job_comments">        
+        <table id='t_comment' data-bind="foreach: comments">
+            <tr>
+                <td class="content">
+                    <div data-bind="html: content"></div>
+                </td>
+                <td class="info">
+                    <div class="name">Job ID</div><div class="value" data-bind="text: jobId"></div>
+                    <div class="name">Author</div><div class="value" data-bind="text: author"></div>
+                    <div class="name">Last Edit</div><div class="value" data-bind="text: time"></div>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <h3 id="add_cmt">New Comment</h3>
+            <form>
+                <textarea id="newComment" data-bind="value: $root.newComment"></textarea>
+                <button id="addComment" class='actionButton level1_button_size' data-bind="click: $root.addComment">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <p style="margin-top: 20px; text-align:left">
+        <a href="{{ url_for('entry', projectid=entry.projectid) }}" >Back to project detail</a>
+    </p>
+    
+</div>
+
+
+{% endblock %}

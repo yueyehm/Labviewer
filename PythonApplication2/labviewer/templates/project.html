@@ -13,7 +13,8 @@
         emails: "",
         state: "",
         statistics: {},
-        testjobs: []
+        testjobs: [],
+        progressurl: "http://" + window.location.host + "/progress/"
     });
 
     function fillProject() {
@@ -51,13 +52,18 @@
             }
         })
     }
+
+    function genprogressurl(projectid, jobid) {
+        return "http://localhost:8080/progress/" + "projectid=" + projectid + "&jobid=" + jobid;
+    }
+
     fillProject();
     filljobs();
 
     $(document).ready(function () {
         document_ready_event_handler();
     });
- 
+
 </script>
 <div id="page_header">
     <h2>Project - {{ entry.Name }}</h2>
@@ -157,6 +163,7 @@
                                         <table class="t2">
                                             <thead>
                                                 <tr>
+                                                    <th>Job Id</th>
                                                     <th>Machine Name</th>
                                                     <th>Machine IP</th>
                                                     <th>Start Time</th>
@@ -168,6 +175,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr ms-repeat-testjob="testjobs" ms-if-loop="testjob.LinkID == testcase.LinkID">
+                                                    <td><a ms-attr-href="{{progressurl|angular}}projectid={{id|angular}}&jobid={{testjob.ID|angular}}">{{testjob.ID|angular}}</a></td>
                                                     <td><span>{{testjob.TestMachineName|angular}}</span></td>
                                                     <td>{{testjob.TestMachineIP|angular}}</td>
                                                     <td class="time">{{testjob.StartTime|angular}}</td>

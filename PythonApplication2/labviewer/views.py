@@ -28,5 +28,11 @@ def testpage():
     return app.send_static_file("test.html")
 
 
+@app.route("/progress/projectid=<projectid>&jobid=<jobid>")
+def progress(projectid, jobid):
+    data = { "projectid": projectid, "jobid": jobid }
+    return render_template("progress.html", entry=data)
+
+
     
 
